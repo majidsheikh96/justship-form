@@ -30,6 +30,20 @@ const PackageForm = () => {
         packageAppend(shipmentPackage)
     }, [])
 
+    const handleOptionChange = (e) => {
+
+        const packageId = e.target.name.match(/package\.(\d+)\.box/)[1];
+        const box = e.target.value;
+        
+        if (box !== "Own Box") {
+            const array = box.match(/\((\d+) x (\d+) x (\d+)\)/).slice(1);
+            console.log(array);
+            setValue(`package.${[packageId]}.box.length`, array[0]);
+            setValue(`package.${[packageId]}.box.width`, array[1]);
+            setValue(`package.${[packageId]}.box.height`, array[2]);
+        }
+    }
+
     // console.log(watch("package"));
 
     return (
@@ -168,7 +182,9 @@ const PackageForm = () => {
                                             <div className="relative bg-white rounded-xl">
                                                 <select
                                                     className="rounded-xl border border-border-gray shadow-border focus:border-light-purple focus:shadow-border-focus focus:outline-none w-full  h-[40px] appearance-none bg-transparent pl-3 pr-6"
-                                                    {...register(`package.${index}.box.size`)}
+                                                    {...register(`package.${index}.box.size`, {
+                                                        onChange: handleOptionChange
+                                                    })}
                                                     defaultValue="Own Box"
                                                 >
                                                     <option value="Own Box">Own Box</option>
