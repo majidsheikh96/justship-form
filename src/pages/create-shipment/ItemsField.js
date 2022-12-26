@@ -23,8 +23,7 @@ const ItemFields = ({ packageIndex }) => {
 
     return (
         <div>
-
-            <div className="px-8 pointer-events-none md:block md:pointer-events-auto">
+            <div className="px-8 md:block">
                 <div className="grid grid-cols-[38px_auto_18%_15%_15.5%] gap-x-1.5 mt-8 pl-1">
                     <p>Qty</p>
                     <p>Item Description </p>
