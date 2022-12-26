@@ -24,7 +24,7 @@ const ItemFields = ({ packageIndex }) => {
     return (
         <div>
 
-            <div className="px-8 hidden pointer-events-none md:block md:pointer-events-auto">
+            <div className="px-8 pointer-events-none md:block md:pointer-events-auto">
                 <div className="grid grid-cols-[38px_auto_18%_15%_15.5%] gap-x-1.5 mt-8 pl-1">
                     <p>Qty</p>
                     <p>Item Description </p>
@@ -37,7 +37,7 @@ const ItemFields = ({ packageIndex }) => {
                         return (
                             <div className="flex flex-col my-2" key={itemIndex}>
                                 <div className="rounded-xl group border border-border-dark-gray shadow-border grid grid-cols-[38px_auto_18%_15%_15.5%] gap-x-1.5 relative h-[36px] w-full">
-                                    <label htmlFor="quantity" hidden=" ">
+                                    <label htmlFor="quantity" hidden>
                                         quantity
                                     </label>
                                     <input
