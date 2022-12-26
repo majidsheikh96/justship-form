@@ -9,7 +9,7 @@ import Addons from "./Addons";
 
 const CreateShipment = () => {
 
-    const [formStep, setFormStep] = useState(3);
+    const [formStep, setFormStep] = useState(1);
     const methods = useForm({ mode: 'all' });
     const { watch, setValue, trigger, formState: { isValid }, reset } = methods;
     const [formData, setFormData] = useState(localStorage.getItem("formData"))
