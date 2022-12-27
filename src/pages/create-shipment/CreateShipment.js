@@ -6,10 +6,11 @@ import SenderForm from "./SenderForm";
 import RecipientForm from "./RecipientForm";
 import PackageForm from "./PackageForm";
 import Addons from "./Addons";
+import ReviewForm from "./ReviewForm";
 
 const CreateShipment = () => {
 
-    const [formStep, setFormStep] = useState(1);
+    const [formStep, setFormStep] = useState(3);
     const methods = useForm({ mode: 'all' });
     const { watch, setValue, trigger, formState: { isValid }, reset } = methods;
     const [formData, setFormData] = useState(localStorage.getItem("formData"))
@@ -27,6 +28,10 @@ const CreateShipment = () => {
             return trigger();
         }
         setFormStep(cur => cur + 1);
+    }
+
+    const handleBack = () => {
+        setFormStep(cur => cur - 1);
     }
 
     useEffect(() => {
@@ -59,6 +64,7 @@ const CreateShipment = () => {
                             {formStep === 2 && <RecipientForm />}
                             {formStep === 3 && <PackageForm />}
                             {formStep === 4 && <Addons />}
+                            {formStep === 5 && <ReviewForm />}
                         </FormProvider>
                     </div>
                 </div>
@@ -67,12 +73,14 @@ const CreateShipment = () => {
             <div className="flex mx-auto py-8 justify-center gap-4 md:gap-10">
 
                 {
-                    formStep > 1 && formStep < 5 ? (
-                        <button onClick={() => setFormStep(formStep - 1)} type="button" id="back-button" className="pill-button button-hover border-light-purple text-light-purple w-[160px] md:w-[180px] h-[40px] disabled:cursor-not-allowed disabled:bg-gray-2 disabled:text-light-purple">Back</button>
+                    formStep > 1 && formStep <= 5 ? (
+                        <button onClick={handleBack} type="button" id="back-button" className="pill-button button-hover border-light-purple text-light-purple w-[160px] md:w-[180px] h-[40px] disabled:cursor-not-allowed disabled:bg-gray-2 disabled:text-light-purple">Back</button>
                     ) : null
                 }
 
-                <button onClick={handleNext} type="button" id="next-button" className="pill-button button-hover bg-light-purple  text-white w-[160px] md:w-[180px] h-[40px] disabled:bg-disabled-purple disabled:cursor-not-allowed disabled:border-transparent">Next</button>
+                {
+                    formStep !== 5 && <button onClick={handleNext} type="button" id="next-button" className="pill-button button-hover bg-light-purple  text-white w-[160px] md:w-[180px] h-[40px] disabled:bg-disabled-purple disabled:cursor-not-allowed disabled:border-transparent">Next</button>
+                }
 
                 {
                     formStep === 5 ? (
