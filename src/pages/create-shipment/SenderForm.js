@@ -15,8 +15,8 @@ const SenderForm = () => {
     }, [register, setValue]);
 
     const handlePurpose = (purpose) => {
-        setPurpose(purpose);
         setValue("sender.purpose", purpose);
+        setPurpose(purpose);
         clearErrors('sender.purpose')
     }
 
@@ -288,22 +288,22 @@ const SenderForm = () => {
                     <p className="text-error-red mt-2 mb-4 h-4"></p>
                     <div className="w-[85%] md:w-full md:px-8 mx-auto">
                         <div className="grid md:grid-cols-3 md:grid-rows-2 gap-4 lg:gap-x-6 place-items-center">
-                            <button type="button" id="SOLD" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${purpose === "Commercial B2B items" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Commercial B2B items")}>
+                            <button type="button" id="SOLD" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${watch("sender.purpose") === "Commercial B2B items" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Commercial B2B items")}>
                                 <p className="">Commercial</p>
                                 <p className="">B2B items</p>
                             </button>
-                            <button type="button" id="GIFT" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${purpose === "Gift" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Gift")}>
+                            <button type="button" id="GIFT" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${watch("sender.purpose") === "Gift" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Gift")}>
                                 <p className="">Gift</p>
                             </button>
-                            <button type="button" id="SAMPLE" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${purpose === "Samples for a prospect" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Samples for a prospect")}>
+                            <button type="button" id="SAMPLE" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${watch("sender.purpose") === "Samples for a prospect" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Samples for a prospect")}>
                                 <p className="">Samples</p>
                                 <p className="">for a prospect</p>
                             </button>
-                            <button type="button" id="REPAIR_AND_RETURN" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${purpose === "Defective items for repair &amp; return" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Defective items for repair &amp; return")}>
+                            <button type="button" id="REPAIR_AND_RETURN" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${watch("sender.purpose") === "Defective items for repair &amp; return" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("Defective items for repair &amp; return")}>
                                 <p className="">Defective items</p>
                                 <p className="">for repair &amp; return</p>
                             </button>
-                            <button type="button" id="NOT_SOLD" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${purpose === "New goods for individual's use" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("New goods for individual's use")}>
+                            <button type="button" id="NOT_SOLD" className={`form-input w-full h-[60px]  hover:bg-dark-purple hover:text-white hover:border-transparent ${watch("sender.purpose") === "New goods for individual's use" && 'bg-light-purple text-white'}`} onClick={() => handlePurpose("New goods for individual's use")}>
                                 <p className="">New goods</p>
                                 <p className="">for individual's use</p>
                             </button>

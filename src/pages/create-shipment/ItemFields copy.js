@@ -1,24 +1,19 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
 const ItemFields = ({ packageIndex }) => {
-    const { register, watch, formState: { errors }, setValue } = useFormContext();
-    // const [total, setTotal] = useState(0)
+    const { register, watch, formState: { errors } } = useFormContext();
     const {
         fields: itemFields,
         append: itemAppend,
         remove: itemRemove,
     } = useFieldArray({
-        name: `package.${packageIndex}.box.items`,
+        name: `packages.${packageIndex}.box.items`,
     });
 
-    const packages = (watch('package'));
-
     const getTotalItemsValue = (packageId) => {
-        const totalPrice = packages[packageId].box.items.reduce((acc, item) => acc + Number(item.totalValue), 0);
-        return totalPrice;
+        // const totalPrice = packages[packageId].box.items.reduce((acc, item) => acc + Number(item.totalValue), 0);
+        return 0;
     }
 
     return (

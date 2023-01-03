@@ -5,12 +5,8 @@ const Recipient = () => {
   const {
     register,
     watch,
-    formState: { errors },
-    setValue,
-    clearErrors,
+    formState: { errors }
   } = useFormContext();
-
-  console.log(errors.recipient);
 
   return (
     <div className="bg-white w-full md:rounded-xl">

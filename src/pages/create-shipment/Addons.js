@@ -1,24 +1,12 @@
-import React, { useState } from 'react'
-import { useFormContext } from 'react-hook-form';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateInsurance, updateTaxAndDuties } from '../../store/formSlice';
 
 const Addons = () => {
 
-    const { register, watch, formState: { errors }, setValue, clearErrors } = useFormContext();
+    const { insurance, taxes_and_duties } = useSelector(state => state.form.addons);
 
-    const [insurance, setInsurance] = useState("No insurance");
-    const [taxPayer, setTaxPayer] = useState("Post-paid, Receiver");
-
-    const handleInsurance = (insurance, value) => {
-        setInsurance(insurance);
-        setValue("insurance", value);
-    };
-
-    const handleTaxPayer = (taxPayer, value) => {
-        setTaxPayer(taxPayer);
-        setValue("taxPayer", value);
-    };
-
-    console.log(watch());
+    const dispatch = useDispatch();
 
     return (
         <div className="flex w-full max-w-3xl justify-center text-gray-4 text-sm">
@@ -29,15 +17,15 @@ const Addons = () => {
                     <div className="w-full sm:w-4/5 lg:w-3/4 px-8 mx-auto">
                         <div className="flex flex-col md:flex-row gap-y-4 md:space-x-12 justify-between">
                             <div className="basis-1/2">
-                                <button type="button" id="noInsurance" className={`form-input w-full h-[60px] border-transparent ${insurance === "No insurance" &&
+                                <button type="button" id="noInsurance" className={`form-input w-full h-[60px] border-transparent ${insurance.insured !== true &&
                                     "bg-light-purple text-white font-semibold border-transparent"
-                                    }`} onClick={() => handleInsurance("No insurance", 0)}>No insurance</button>
+                                    }`} onClick={() => dispatch(updateInsurance({ insured: false, value: 0 }))}>No insurance</button>
                             </div>
                             <div className="basis-1/2">
-                                <button type="button" id="addInsurance" className={`form-input w-full h-[60px] hover:bg-dark-purple group hover:text-white hover:border-transparent ${insurance === "Add insurance" &&
+                                <button type="button" id="addInsurance" className={`form-input w-full h-[60px] hover:bg-dark-purple group hover:text-white hover:border-transparent ${insurance.insured === true &&
                                     "bg-light-purple text-white font-semibold border-transparent"
-                                    }`} onClick={() => handleInsurance("Add insurance", 7.12)}>Add insurance<br />
-                                    <span className={`font-semibold text-dark-purple group-hover:text-white ${insurance === "Add insurance" &&
+                                    }`} onClick={() => dispatch(updateInsurance({ insured: true, value: 7.12 }))}>Add insurance<br />
+                                    <span className={`font-semibold text-dark-purple group-hover:text-white ${insurance.insured === true &&
                                     " text-white"
                                     }`}>(+ SGD$ 7.12)</span>
                                 </button>
@@ -51,15 +39,15 @@ const Addons = () => {
                     <div className="w-full sm:w-4/5 lg:w-3/4 px-8 mx-auto">
                         <div className="flex flex-col md:flex-row gap-y-4 md:space-x-12 justify-between">
                             <div className="flex flex-col justify-center basis-1/2">
-                                <button type="button" id="receiverPayTax" className={`form-input w-full h-[60px] place-self-center border-transparent ${taxPayer === "Post-paid, Receiver" &&
+                                <button type="button" id="receiverPayTax" className={`form-input w-full h-[60px] place-self-center border-transparent ${taxes_and_duties.payer === "receiver" &&
                                     "bg-light-purple text-white font-semibold border-transparent"
-                                    }`} onClick={() => handleTaxPayer("Post-paid, Receiver", 0)}>Post-paid, Receiver</button>
+                                    }`} onClick={() => dispatch(updateTaxAndDuties({ payer: "receiver", value: 0 }))}>Post-paid, Receiver</button>
                             </div>
                             <div className="basis-1/2">
-                                <button type="button" id="senderPayTax" className={`form-input w-full h-[60px] disabled:bg-disabled-purple disabled:text-white disabled:border-transparent hover:bg-dark-purple hover:text-white group hover:border-transparent ${taxPayer === "Pre-paid, Sender" &&
+                                <button type="button" id="senderPayTax" className={`form-input w-full h-[60px] disabled:bg-disabled-purple disabled:text-white disabled:border-transparent hover:bg-dark-purple hover:text-white group hover:border-transparent ${taxes_and_duties.payer === "sender" &&
                                     "bg-light-purple text-white font-semibold border-transparent"
-                                    }`} onClick={() => handleTaxPayer("Pre-paid, Sender", 67.27)}>Pre-paid, Sender<br />
-                                    <span className={`font-semibold text-dark-purple group-hover:text-white ${taxPayer === "Pre-paid, Sender" && " text-white" }`}>(+SGD $67.27)</span>
+                                    }`} onClick={() => dispatch(updateTaxAndDuties({ payer: "sender", value: 67.00 }))}>Pre-paid, Sender<br />
+                                    <span className={`font-semibold text-dark-purple group-hover:text-white ${taxes_and_duties.payer === "sender" && " text-white" }`}>(+SGD $67.27)</span>
                                 </button>
                             </div>
                         </div>
